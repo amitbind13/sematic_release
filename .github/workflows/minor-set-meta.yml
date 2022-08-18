@@ -1,0 +1,16 @@
+name: 'Set prerelease'
+on:
+  push:
+    branches:
+      - main
+test:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: slime-hatena/semantic-versioning-calculator-action@main
+      id: calc
+      with:
+        version: '1.2.3+develop'
+        increment_minor: 'true'
+        increment_patch: 'true' # ignored.
+        prerelease: 'test'
+    - run: echo "${{steps.calc.outputs.version}}" # 1.3.0+test
